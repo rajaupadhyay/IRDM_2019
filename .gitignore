@@ -2,3 +2,4 @@ data/
 dump.rdb
 *.pickle
 *.sqlite
+*.db

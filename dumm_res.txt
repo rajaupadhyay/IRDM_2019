@@ -1,0 +1,29 @@
+['nikolaj', 'costerwaldau', 'work', 'fox', 'broadcast', 'compani']
+Retrieving Top 5 Documents
+total documents 624233
+624233
+Total Time 65.8222029209137
+[327495 457845 551251 464180  31584]
+
+
+Retrieving Top 5 Documents
+total documents 1909
+1909
+Total Time 48.557881116867065
+[1514  997 1014 1176  390]
+
+
+[1751323, 3313862, 1339638, 1782665, 1459876]
+
+
+Loading the idf vector
+IDF Vector loaded
+Loading the tfidf matrix
+Converting to CSR Format
+TFIDF Matrix loaded
+['nikolaj', 'costerwaldau', 'work', 'fox', 'broadcast', 'compani']
+Retrieving Top 5 Documents
+total documents 1909
+1909
+Total Time 11.117275953292847
+[1751323, 3313862, 1339638, 1782665, 1459876]
