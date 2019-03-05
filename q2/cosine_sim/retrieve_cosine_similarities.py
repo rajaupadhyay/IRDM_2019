@@ -14,6 +14,8 @@ import zlib
 from numpy import linalg as LA
 import pandas as pd
 import json
+from multiprocessing import Pool
+import sys
 
 conn = redis.StrictRedis('localhost', 6379, charset="utf-8", decode_responses=True)
 print(conn.keys())
