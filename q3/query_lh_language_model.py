@@ -1,5 +1,5 @@
 '''
-Retrieves top 5 documents for the claims (without MultiProcessing)
+Vanilla Query Likelihood Unigram Language Model (No smoothing)
 '''
 import pickle
 import numpy as np
@@ -19,16 +19,10 @@ import pandas as pd
 import json
 from multiprocessing import Pool
 import sys
+from math import floor
 
 conn = redis.StrictRedis('localhost', 6379, charset="utf-8", decode_responses=True)
 print(conn.keys())
-print(conn.hget('doc_name_index', 'The_Ten_Commandments_-LRB-1956_film-RRB-'))
-check_idf = conn.hget('vocab_dictionary', 'costerwaldau')
-
-# [3510191, 5149384, 291223, 3541706, 3508468]
-
-# [4730014, 4696498, 4700169, 4706623, 4773870]
-
 
 def compress_set(obj):
     return sqlite3.Binary(zlib.compress(pickle.dumps(obj, pickle.HIGHEST_PROTOCOL)))
@@ -36,81 +30,54 @@ def compress_set(obj):
 def decompress_set(obj):
     return pickle.loads(zlib.decompress(bytes(obj)))
 
-high_doc_freq_words = pd.read_csv('high_freq_words_stash.csv', sep=',')
-high_doc_freq_words = list(high_doc_freq_words['word'].values)
 
-print('Loading the idf vector')
-idf_vec_f = open('idf_vector.pickle', 'rb')
-idf_vec = pickle.load(idf_vec_f)
-idf_vec_f.close()
-print('IDF Vector loaded')
-
-print('Loading the enl vector')
-enl_vec_f = open('enlv_for_documents.pickle', 'rb')
-enlv = pickle.load(enl_vec_f)
-enl_vec_f.close()
-print('enl Vector loaded')
-
-
-print('idf_val', idf_vec[int(check_idf)])
-
+'''
+Retrieve top 5 documents using Query Likelihood Unigram Language Model
+Try set intersection method to only include documents that contain ALL the query terms
+Since a lack of a term results in 0 anyway
+'''
 def retrieve_top_five_docs(tokens):
-    # print('Retrieving Top 5 Documents')
     tokens = [tkn for tkn in tokens if conn.hget('vocab_dictionary', tkn)]
-    term_freq = Counter(tokens)
-    total_length = len(tokens)
-    term_freq_vector = np.array([term_freq[tkn]/total_length for tkn in tokens])
 
-    tkn_indices = [int(conn.hget('vocab_dictionary', tkn)) for tkn in tokens]
-    idf_vector = np.array([idf_vec[tkn_idx] for tkn_idx in tkn_indices])
-
-    tfidf_for_query = term_freq_vector * idf_vector
-    enlv_for_query = LA.norm(tfidf_for_query)
-
-
-
+    length_of_claim = len(tokens)
     # Key: Doc number/ID, value: cosine similarity
-    result_dictionary = defaultdict(float)
-    enlv_dictionary = {}
+    # Set defaultdict to start with 1 (because we're multplying the probs)
+    result_dictionary = defaultdict(lambda: 1.0)
+
+    # Lets maintain a dictionary to keep count of how many query terms have been added to the doc
+    # This is important because if a query term does not exist in a doc then the product should result in 0
+    words_added = defaultdict(int)
 
     with SqliteDict('ividx_with_freq.sqlite', decode=decompress_set) as ividx_dct:
         for tkn_idx in range(len(tokens)):
             tkn = tokens[tkn_idx]
-            # if tkn in high_doc_freq_words:
-            #     continue
-
-            idf_for_word = idf_vector[tkn_idx]
-            tfidf_query = tfidf_for_query[tkn_idx]
-            temp_buf = tfidf_query * enlv_for_query
 
             docs_from_ividx = ividx_dct['ividx_{}'.format(tkn)]
-            # sorted_docs = sorted(docs_from_ividx, key=lambda x: x[1], reverse=True)
-            # print(tkn)
-            # print(sorted_docs[:10])
 
             for doc_tuple in docs_from_ividx:
-                # result_dictionary[doc_tuple[0]] += (doc_tuple[1] * idf_for_word * tfidf_query)/(enlv[doc_tuple[0]]*enlv_for_query)
-                result_dictionary[doc_tuple[0]] += ((doc_tuple[1] * idf_for_word)/(enlv[doc_tuple[0]])) * temp_buf
+                result_dictionary[doc_tuple[0]] *= doc_tuple[1]
+                words_added[doc_tuple[0]] += 1
 
-    # print(len(result_dictionary))
-    # with SqliteDict('enlv_for_docs.sqlite', decode=decompress_set) as enlv_dct:
-    #     result_dictionary = {k: result_dictionary[k]/(enlv_dct[k]*enlv_for_query) for k in result_dictionary.keys()}
+    # We only want to look at the documents that have all query terms
+    # If the document did not have all query terms then it would be zeroed out when multplying
+    formatted_result_dictionary = {k:v for k,v in result_dictionary.items() if floor(words_added[k]/length_of_claim) == 1}
 
-
-    top_5_document_indices = sorted(result_dictionary, key=result_dictionary.get, reverse=True)[:5]
+    top_5_document_indices = sorted(formatted_result_dictionary, key=formatted_result_dictionary.get, reverse=True)[:5]
 
     return top_5_document_indices
 
 
 
-
+'''
+Iterate over the training file containing the claims
+Retrieve top 5 docs for each claim
+'''
 translator = str.maketrans('', '', string.punctuation)
 
 stop_words = set(stopwords.words('english'))
 stop_words = stop_words.union(['-lrb-', '-rrb-'])
 
 porter_stemmer = PorterStemmer()
-
 
 def tokenise_claim(claim):
 

@@ -1,3 +1,6 @@
+'''
+Retrieves top 5 documents for the claims (with MultiProcessing)
+'''
 import pickle
 import numpy as np
 import redis
