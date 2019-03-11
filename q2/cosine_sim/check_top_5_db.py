@@ -5,6 +5,7 @@ import pickle
 import time
 from multiprocessing import Pool
 import sys
+import redis
 
 # batch_1 last claim: 6744
 # batch_2 last claim: 204613
@@ -18,10 +19,7 @@ def decompress_set(obj):
     return pickle.loads(zlib.decompress(bytes(obj)))
 
 # top_5_dict = SqliteDict('top_5_documents_tfidf.sqlite', decode=decompress_set)
-# print(top_5_dict[6744])
-# print(top_5_dict[204613])
-# print(top_5_dict[94843])
-# print(top_5_dict[140740])
+# print(top_5_dict[155975])
 
 
 # idnp_f = open('inverted_doc_name_dict.pickle', 'rb')

@@ -19,16 +19,9 @@ import pandas as pd
 import json
 from multiprocessing import Pool
 import sys
+from scipy.sparse import csr_matrix, csc_matrix
 
 conn = redis.StrictRedis('localhost', 6379, charset="utf-8", decode_responses=True)
-print(conn.keys())
-print(conn.hget('doc_name_index', 'The_Ten_Commandments_-LRB-1956_film-RRB-'))
-check_idf = conn.hget('vocab_dictionary', 'costerwaldau')
-
-# [3510191, 5149384, 291223, 3541706, 3508468]
-
-# [4730014, 4696498, 4700169, 4706623, 4773870]
-
 
 def compress_set(obj):
     return sqlite3.Binary(zlib.compress(pickle.dumps(obj, pickle.HIGHEST_PROTOCOL)))
@@ -36,14 +29,22 @@ def compress_set(obj):
 def decompress_set(obj):
     return pickle.loads(zlib.decompress(bytes(obj)))
 
-# high_doc_freq_words = pd.read_csv('high_freq_words_stash.csv', sep=',')
-# high_doc_freq_words = list(high_doc_freq_words['word'].values)
+def pickle_object(obj, filename):
+    with open(filename+'.pickle', 'wb') as handle:
+        pickle.dump(obj, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
-print('Loading the idf vector')
-idf_vec_f = open('idf_vector.pickle', 'rb')
-idf_vec = pickle.load(idf_vec_f)
-idf_vec_f.close()
-print('IDF Vector loaded')
+# print('Loading the vocab')
+# vocab_index_f = open('tf_idf_matrix_compressed.pickle', 'rb')
+# vocab_index = pickle.load(vocab_index_f)
+# vocab_index_f.close()
+
+
+
+print('Loading the tfidf matrix')
+tfidf_matrix_f = open('tfidf_csr.pickle', 'rb')
+tfidf_matrix = pickle.load(tfidf_matrix_f)
+tfidf_matrix_f.close()
+print('TFIDF Matrix loaded')
 
 print('Loading the enl vector')
 enl_vec_f = open('enlv_for_documents.pickle', 'rb')
@@ -52,11 +53,18 @@ enl_vec_f.close()
 print('enl Vector loaded')
 
 
-print('idf_val', idf_vec[int(check_idf)])
+print('Loading the idf vector')
+idf_vec_f = open('idf_vector.pickle', 'rb')
+idf_vec = pickle.load(idf_vec_f)
+idf_vec_f.close()
+print('IDF Vector loaded')
+
 
 def retrieve_top_five_docs(tokens):
     # print('Retrieving Top 5 Documents')
+    start_time = time.time()
     tokens = [tkn for tkn in tokens if conn.hget('vocab_dictionary', tkn)]
+    # tokens = [tkn for tkn in tokens if tkn in vocab_index]
     term_freq = Counter(tokens)
     total_length = len(tokens)
 
@@ -64,7 +72,9 @@ def retrieve_top_five_docs(tokens):
 
     term_freq_vector = np.array([term_freq[tkn]/total_length for tkn in tokens])
 
+    # tkn_indices = [int(vocab_index[tkn]) for tkn in tokens]
     tkn_indices = [int(conn.hget('vocab_dictionary', tkn)) for tkn in tokens]
+
     idf_vector = np.array([idf_vec[tkn_idx] for tkn_idx in tkn_indices])
 
     tfidf_for_query = term_freq_vector * idf_vector
@@ -76,34 +86,35 @@ def retrieve_top_five_docs(tokens):
     result_dictionary = defaultdict(float)
     enlv_dictionary = {}
 
-    with SqliteDict('ividx_with_freq.sqlite', decode=decompress_set) as ividx_dct:
+
+    rows = tkn_indices
+    cols = [0]*len(tkn_indices)
+    data = list(tfidf_for_query)
+
+
+    tfidf_q = csc_matrix( (data,(rows,cols)), shape=(3922275,1) )
+
+    unique_docs = set()
+    with SqliteDict('ividx_no_freq.sqlite', decode=decompress_set) as ividx_dct:
         for tkn_idx in range(len(tokens)):
             tkn = tokens[tkn_idx]
-            # if tkn in high_doc_freq_words:
-            #     continue
-
-            idf_for_word = idf_vector[tkn_idx]
-            tfidf_query = tfidf_for_query[tkn_idx]
-            RHS_of_cosine_sim_eqtn = tfidf_query / enlv_for_query
 
             docs_from_ividx = ividx_dct['ividx_{}'.format(tkn)]
-            # sorted_docs = sorted(docs_from_ividx, key=lambda x: x[1], reverse=True)
-            # print(tkn)
-            # print(sorted_docs[:10])
-
-            for doc_tuple in docs_from_ividx:
-                result_dictionary[doc_tuple[0]] += (((doc_tuple[1] * idf_for_word)/(enlv[doc_tuple[0]])) * RHS_of_cosine_sim_eqtn)
-
-    # print(len(result_dictionary))
-    # with SqliteDict('enlv_for_docs.sqlite', decode=decompress_set) as enlv_dct:
-    #     result_dictionary = {k: result_dictionary[k]/(enlv_dct[k]*enlv_for_query) for k in result_dictionary.keys()}
+            unique_docs = unique_docs.union(docs_from_ividx)
 
 
-    top_5_document_indices = sorted(result_dictionary, key=result_dictionary.get, reverse=True)[:5]
+    rows_lhs = list(unique_docs)
 
-    return top_5_document_indices
+    start_time_mul = time.time()
+    res = tfidf_matrix[rows_lhs] * tfidf_q
+    end_time_mul = time.time()
+    print(end_time_mul-start_time_mul)
 
 
+
+
+    end_time = time.time()
+    print('total_time', end_time - start_time)
 
 
 translator = str.maketrans('', '', string.punctuation)
@@ -165,4 +176,4 @@ with open('data/train.jsonl', 'r') as openfile:
         tokenised_claim = tokenise_claim(curr_claim)
 
         res = retrieve_top_five_docs(tokenised_claim)
-        print(claim_id, res)
+        # print(claim_id, res)
