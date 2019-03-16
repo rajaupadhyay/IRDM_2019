@@ -7,33 +7,33 @@ inverted_doc_name_dict_f.close()
 
 # print(inverted_doc_name_dict['597645'])
 
-batch1= [2912923, 3761580, 1100061, 2823548, 4525960]
+batch1= [3541706, 3508468, 4845618, 5149384, 291223]
 
-# batch2= [2206423, 703559, 4441695, 1515196, 4164124]
-# batch3= [2821719, 2993350, 2925579, 2056107, 1199268]
-# batch4= [2292290, 1196885, 2194262, 614051, 3479931]
-# batch5= [2878423, 2937676, 2808351, 5276303, 1863570]
-# batch6= [2952216, 409480, 1765202, 2069582, 2939083]
-# batch7= [264508, 936341, 865249, 123859, 3853929]
-# batch8= [3011270, 2963696, 1385802, 2947329, 2889432]
-# batch9= [2817900, 2928246, 3773937, 2929726, 3803191]
-# batch10= [2985953, 2965524, 2491648, 338785, 4468568]
+batch2= [657990, 777906, 2456273, 1934980, 3175162]
+batch3= [2247943, 1724678, 4514583, 4849139, 441063]
+batch4= [1612423, 348093, 264217, 2511050, 196483]
+batch5= [4469627, 4646988, 2877221, 1080183, 4767363]
+batch6= [2873021, 2251341, 2169221, 2175161, 2232762]
+batch7= [5324623, 721047, 1897266, 2173709, 646266]
+batch8= [3533625, 4235595, 725991, 2856246, 3823817]
+batch9=[4727442, 62350, 819893, 108378, 110863]
+batch10= [2659007, 4831625, 4835714, 4774169, 1327510]
 
-# [batch1, batch2, batch3, batch4, batch5, batch6, batch7, batch8, batch9, batch10]
+batches = [batch1, batch2, batch3, batch4, batch5, batch6, batch7, batch8, batch9, batch10]
 
-# for batch in [batch1]:
-#     top_5_names = []
-#     for itx in batch:
-#         top_5_names.append(inverted_doc_name_dict[str(itx)])
+for batch in batches:
+    top_5_names = []
+    for itx in batch:
+        top_5_names.append(inverted_doc_name_dict[str(itx)])
+
+    print(top_5_names)
+
+
+
+# conn = sqlite3.connect('wiki_corpus.db')
+# c = conn.cursor()
 #
-#     print(top_5_names)
-
-
-
-conn = sqlite3.connect('wiki_corpus.db')
-c = conn.cursor()
-
-c.execute('SELECT * FROM wiki WHERE id = ?', ("Since_I've_Been_Loving_You", ))
-# c.execute('SELECT COUNT(*) FROM wiki')
-
-print(c.fetchone()[1])
+# c.execute('SELECT * FROM wiki WHERE id = ?', ("Since_I've_Been_Loving_You", ))
+# # c.execute('SELECT COUNT(*) FROM wiki')
+#
+# print(c.fetchone()[1])
