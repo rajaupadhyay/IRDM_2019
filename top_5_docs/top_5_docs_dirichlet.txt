@@ -1,0 +1,44 @@
+[3541706, 3508468, 5149384, 4845618, 291223]
+
+[657990, 777906, 2456273, 1934980, 3175162]
+[2247943, 1724678, 4514583, 441063, 4849139]
+[1612423, 264217, 348093, 2511050, 196483]
+[4469627, 4646988, 2877221, 1080183, 4767363]
+[2251341, 2873021, 2169221, 2175161, 2232762]
+[721047, 5324623, 747145, 2639111, 2173709]
+[3533625, 4235595, 3823817, 2709482, 725991]
+[4727442, 819893, 2904706, 834098, 62350]
+[4831625, 2659007, 4835714, 4767495, 3776368]
+
+
+
+Claim 1
+['New_Amsterdam_-LRB-TV_series-RRB-', 'Nikolaj_Coster-Waldau', 'Ved_verdens_ende', 'The_Other_Woman_-LRB-2014_film-RRB-', 'A_Second_Chance_-LRB-2014_film-RRB-']
+
+Claim 2
+['Bedside_Press', 'Brett_Atwood', 'Joel_Spolsky', 'Genre_fiction', 'Mary_Walsh-COLON-_Open_Book']
+
+Claim 3
+['History_of_art', 'Fine_art', 'Sky_Arts_-LRB-New_Zealand-RRB-', 'Art', 'The_arts']
+
+Claim 4
+['Empire_Girls-COLON-_Julissa_and_Adrienne', 'Adrienne_Bailon', "All_You've_Got", 'Julissa_Bermudez', '3LW']
+
+Claim 5
+['Skyhooks_-LRB-band-RRB-', 'System_of_a_Down', 'Limbo_Boots', 'Circulatory_System_-LRB-band-RRB-', 'The_West_Hollywood_Blondes']
+
+Claim 6
+['Homeland_-LRB-TV_series-RRB-', 'List_of_Homeland_episodes', 'Homeland_-LRB-season_6-RRB-', 'Homeland_-LRB-season_2-RRB-', 'Homeland_-LRB-season_3-RRB-']
+
+Claim 7
+['Beautiful_-LRB-Snoop_Dogg_song-RRB-', "You_Can't_Hide_Beautiful", 'Beyoncé_discography', 'Kanye_West_discography', 'If_You_Know_What_I_Mean']
+
+Claim 8
+['Neal_Schon', 'Schön', 'Planet_Us', 'Late_Nite', 'Beyond_the_Thunder']
+
+Claim 9
+['TD_Garden', 'Boston_Garden', 'List_of_Boston_Celtics_head_coaches', 'Boston_Celtics', '1974–75_Boston_Celtics_season']
+
+Claim 10
+['The_Nth_Commandment', 'Katherine_Orrison', 'The_Ten_Commandments_-LRB-1923_film-RRB-', 'The_Ten_Commandments_-LRB-1956_film-RRB-', 'Peplum_-LRB-film_genre-RRB-']
+
