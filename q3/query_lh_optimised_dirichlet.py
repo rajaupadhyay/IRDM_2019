@@ -69,9 +69,6 @@ def retrieve_top_five_docs(tokens, ividx_dct):
 
     result_dictionary = defaultdict(float)
 
-    # words_added = defaultdict(list)
-    indices_remaining = defaultdict(lambda: tkn_indices.copy())
-
     for tkn_idx in range(len(tokens)):
         tkn = tokens[tkn_idx]
 
@@ -86,35 +83,12 @@ def retrieve_top_five_docs(tokens, ividx_dct):
             curr_idx = int(doc_tuple[0])
             # curr_doc_length = doc_length_vec[int(doc_tuple[0])]
             # denom = curr_doc_length+mu
-            inner_calc = (lhs_of_prod[curr_idx])*(doc_tuple[1]) + (mu_div_denom[curr_idx])*(normalisedWordCountInColl)
+            inner_calc = (((lhs_of_prod[curr_idx])*(doc_tuple[1])) / ((mu_div_denom[curr_idx])*(normalisedWordCountInColl))) + 1
             result_dictionary[doc_tuple[0]] += log(inner_calc)
-            indices_remaining[doc_tuple[0]].remove(tknIdxInVocab)
             # words_added[doc_tuple[0]].append(tknIdxInVocab)
 
-    formatted_result_dictionary = {}
-    l1_et = time.time()
-    print('Loop 1 time ', l1_et - l1_st)
 
-    l2_st = time.time()
-    for k, v in result_dictionary.items():
-        new_value = v
-        if indices_remaining[k]:
-            curr_idx = int(k)
-            # curr_doc_length = doc_length_vec[int(k)]
-            # denom = curr_doc_length+mu
-
-            sumVal = [log((mu_div_denom[curr_idx]) * wordFreqInColl[tknIdxInVocab]) for tknIdxInVocab in indices_remaining[k]]
-
-            sumVal = sum(sumVal)
-            new_value += sumVal
-
-        formatted_result_dictionary[k] = new_value
-
-
-    top_5_document_indices = sorted(formatted_result_dictionary, key=formatted_result_dictionary.get, reverse=True)[:5]
-
-    l2_et = time.time()
-    print('Loop 2 time ', l2_et - l2_st)
+    top_5_document_indices = sorted(result_dictionary, key=result_dictionary.get, reverse=True)[:5]
 
 
     return top_5_document_indices

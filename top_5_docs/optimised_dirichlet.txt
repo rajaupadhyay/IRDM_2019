@@ -1,0 +1,42 @@
+[3508468, 4845618, 3541706, 1741662, 1816339]
+
+[657990, 2979977, 2461570, 1908649, 3664762]
+[2247943, 2872042, 1724678, 273735, 3488916]
+[264217, 3023598, 2511050, 1612423, 4849862]
+[4469627, 304677, 4646988, 2877221, 4252184]
+[2251341, 2873021, 451816, 4119278, 2161160]
+[4424082, 747145, 2639111, 4142040, 1000875]
+[4235595, 3533625, 1457124, 5165955, 609198]
+[4727442, 4518635, 834098, 2904706, 4015936]
+[4767495, 998899, 5289509, 4835714, 3948940]
+
+claim1
+['Nikolaj_Coster-Waldau', 'The_Other_Woman_-LRB-2014_film-RRB-', 'New_Amsterdam_-LRB-TV_series-RRB-', 'Game_of_Thrones_-LRB-season_3-RRB-', 'Game_of_Thrones_-LRB-season_2-RRB-']
+
+claim2
+['Bedside_Press', 'List_of_video_game_crowdfunding_projects', 'Jett_Atwood', 'Giancarlo_Volpe', 'OSType']
+
+claim3
+['History_of_art', 'List_of_New_Music_America_performances', 'Fine_art', 'Acropolis_Institute_of_Technology_and_Research', 'Narrative']
+
+claim4
+['Adrienne_Bailon', "MTV_New_Year's", 'Julissa_Bermudez', 'Empire_Girls-COLON-_Julissa_and_Adrienne', 'The_Cheetah_Girls_-LRB-film_series-RRB-']
+
+claim5
+['Skyhooks_-LRB-band-RRB-', '478th_Aeronautical_Systems_Wing', 'System_of_a_Down', 'Limbo_Boots', 'Santa_María_School_massacre']
+
+claim6
+['Homeland_-LRB-TV_series-RRB-', 'List_of_Homeland_episodes', 'Andrew_Kaplan', 'Rodina_-LRB-TV_series-RRB-', 'Homeland_-LRB-season_1-RRB-']
+
+claim7
+['Snoop_Dogg_discography', 'Beyoncé_discography', 'Kanye_West_discography', 'Ricky_Martin_singles_discography', 'Celine_Dion_singles_discography']
+
+claim8
+['Schön', 'Neal_Schon', 'Dr._Mastermind', 'Walter_Herbert_-LRB-manager-RRB-', 'Ava_Fabian']
+
+claim9
+['TD_Garden', 'Sports_in_Boston', 'Boston_Celtics', 'List_of_Boston_Celtics_head_coaches', 'Red_Auerbach']
+
+claim10
+['The_Ten_Commandments_-LRB-1956_film-RRB-', 'Cecil_B._DeMille', 'Yvonne_De_Carlo', 'The_Ten_Commandments_-LRB-1923_film-RRB-', 'Production_of_Ben-Hur_-LRB-1959_film-RRB-']
+
