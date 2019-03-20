@@ -33,7 +33,7 @@ for batch in batches:
 # conn = sqlite3.connect('wiki_corpus.db')
 # c = conn.cursor()
 #
-# c.execute('SELECT * FROM wiki WHERE id = ?', ("Since_I've_Been_Loving_You", ))
+# c.execute('SELECT * FROM wiki WHERE id = ?', ("Carrie_Fisher", ))
 # # c.execute('SELECT COUNT(*) FROM wiki')
 #
-# print(c.fetchone()[1])
+# print(c.fetchone()[2])
