@@ -1,5 +1,6 @@
 '''
 Query Likelihood Unigram Language Model (WITH DIRICHLET SMOOTHING)
+RETURNS 5 DOCS PER CLAIM
 MultiProcessing
 '''
 import pickle
@@ -21,6 +22,14 @@ from multiprocessing import Pool
 import sys
 from functools import reduce
 from math import log
+
+'''
+First tokenise the claims using tokenise_claims.py
+Read the claimToDocsDict.pickle dict
+Add to this dict new claims and docs
+pickle this dict back to disk
+edit the train batches and reset cursor
+'''
 
 conn = redis.StrictRedis('localhost', 6379, charset="utf-8", decode_responses=True)
 
@@ -149,8 +158,6 @@ inverted_doc_name_dict = pickle.load(inverted_doc_name_dict_f)
 inverted_doc_name_dict_f.close()
 
 
-
-
 def helper_fn(batch_fn):
     # Use this to iterate over the file
     # For each claim, first tokenise it and then retrieve_top_five_docs
@@ -194,18 +201,17 @@ def helper_fn(batch_fn):
 
 
 
-'''
-First tokenise the claims using tokenise_claims.py
-Read the claimToDocsDict.pickle dict
-Add to this dict new claims and docs
-pickle this dict back to disk
-edit the train batches and reset cursor
-'''
+
 
 # Main for multiprocessing
 def main():
     # Create a new db which will store the 5 top docs for each claim
     # top_5_docs_sq_db = SqliteDict('top_5_documents_tfidf.sqlite', autocommit=True, encode=compress_set, decode=decompress_set)
+
+    claimToDocsDict_f = open('claimToDocsDict.pickle', 'rb')
+    claimToDocsDict = pickle.load(claimToDocsDict_f)
+    claimToDocsDict_f.close()
+
 
     # Split the training file of claims into 4 batches to distribute load
     batch_1 = 'data/tokenised_train_batches/train_batch1.pickle'
@@ -242,8 +248,10 @@ def main():
     final_dict = {**first_batch_res, **second_batch_res, **third_batch_res, **fourth_batch_res}
 
     print('Pickling result into claimToDocsDict.pickle')
-    # pickle_object(final_dict, 'claimToDocsDict')
+    # Update claimToDocsDict
 
+    claimToDocsDict.update(final_dict)
+    pickle_object(claimToDocsDict, 'claimToDocsDict_V1')
     # # Insert the results into the database
     # for k,v in final_dict.items():
     #     top_5_docs_sq_db[k] = v
