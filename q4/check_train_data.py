@@ -8,22 +8,23 @@ from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 
-y_pred_proba_f = open('y_pred_proba.pkl', 'rb')
-y_pred_proba = pickle.load(y_pred_proba_f)
-y_pred_proba_f.close()
 
-
-y_test_f = open('data/imbalanced_train_test/y_test.pickle', 'rb')
-y_test = pickle.load(y_test_f)
-y_test_f.close()
-
-fpr, tpr, _ = metrics.roc_curve(y_test,  y_pred_proba)
-auc = metrics.roc_auc_score(y_test, y_pred_proba)
-plt.title('ROC Curve (Balanced Train - Imbalanced Test)')
-plt.plot(fpr,tpr,label="data, auc="+str(round(auc, 4)), color='navy')
-plt.plot([0, 1], [0, 1], color='red', linestyle='--')
-plt.legend(loc=4)
-plt.show()
+# y_pred_proba_f = open('y_pred_proba.pkl', 'rb')
+# y_pred_proba = pickle.load(y_pred_proba_f)
+# y_pred_proba_f.close()
+#
+#
+# y_test_f = open('data/imbalanced_train_test/y_test.pickle', 'rb')
+# y_test = pickle.load(y_test_f)
+# y_test_f.close()
+#
+# fpr, tpr, _ = metrics.roc_curve(y_test,  y_pred_proba)
+# auc = metrics.roc_auc_score(y_test, y_pred_proba)
+# plt.title('ROC Curve (Balanced Train - Imbalanced Test)')
+# plt.plot(fpr,tpr,label="data, auc="+str(round(auc, 4)), color='navy')
+# plt.plot([0, 1], [0, 1], color='red', linestyle='--')
+# plt.legend(loc=4)
+# plt.show()
 
 
 # X_train_f = open('data/imbalanced_train_test/X_train.pickle', 'rb')
