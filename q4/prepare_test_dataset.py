@@ -1,17 +1,5 @@
 '''
-Build the training dataset for logit
-
-First we're just testing the model on 18000 claims
-
-- Iterate over the claimToDocsDict
-- For each claim and respective docs list
-    - First get the relevant sentences from the evidence field for the specific claim (Positive examples)
-    - Randomly sample the same number (+1/2) irrelevant sentences from the docs list
-    - Represent these sentences using embeddings (Glove Gensim)
-    - Represent the claim using the same embedding method
-    - A single datapoint would now consist of one sentence (relevant or irrelevant) and the claim (as 2 distinct features represented as embeddings (,300)) concatenated
-    - The label for the datapoint would be whether the sentence (1st feature) is relevant or not with respect to the claim (2nd feature)
-
+Build the test dataset for logit (Development FEVER dataset)
 '''
 
 import pickle
@@ -57,12 +45,12 @@ def file_reader_generator(file_object):
         yield data
 
 print('Loading claimToDocsDict')
-claimToDocsDict_f = open('claimToDocsDict_train.pickle', 'rb')
+claimToDocsDict_f = open('claimToDocsDict_test.pickle', 'rb')
 claimToDocsDict = pickle.load(claimToDocsDict_f)
 claimToDocsDict_f.close()
 
 print('Loading Claims')
-training_db = SqliteDict('training_db.sqlite', decode=decompress_set)
+testing_db = SqliteDict('testing_db.sqlite', decode=decompress_set)
 
 print('Loading wiki corpus')
 conn = sqlite3.connect('wiki_corpus.db')
@@ -97,13 +85,13 @@ def tokenise_line(line):
 
 
 
-X_train = []
-y_train = []
+X_test = []
+y_test = []
 
 '''
-Build training dataset
+Build testing dataset
 '''
-print('Building training dataset')
+print('Building testing dataset')
 ctr_breaker = 0
 start_time = time.time()
 for claimId, docList in claimToDocsDict.items():
@@ -115,9 +103,9 @@ for claimId, docList in claimToDocsDict.items():
 
     ctr_breaker += 1
 
-    supportsOrRefutes = training_db[claimId][1]
+    supportsOrRefutes = testing_db[claimId][1]
     if supportsOrRefutes != 'NOT ENOUGH INFO':
-        claim = training_db[claimId][2]
+        claim = testing_db[claimId][2]
 
         claimTokens = tokenise_line(claim)
 
@@ -132,7 +120,7 @@ for claimId, docList in claimToDocsDict.items():
             lenClaimVec = len(claimVec)
             claimVec = sum(claimVec)/lenClaimVec
 
-            positiveExamples = training_db[claimId][-1]
+            positiveExamples = testing_db[claimId][-1]
             positiveExamples = flatten_list(positiveExamples)
             addedLines = []
 
@@ -167,8 +155,8 @@ for claimId, docList in claimToDocsDict.items():
                     lineVec = sum(lineVec)/lenLineVec
 
                     trainingVector = np.concatenate([claimVec, lineVec])
-                    X_train.append(trainingVector)
-                    y_train.append(1)
+                    X_test.append(trainingVector)
+                    y_test.append(1)
 
 
             # Add negative examples
@@ -202,21 +190,21 @@ for claimId, docList in claimToDocsDict.items():
                     lineVec = sum(lineVec)/lenLineVec
 
                     trainingVector = np.concatenate([claimVec, lineVec])
-                    X_train.append(trainingVector)
-                    y_train.append(0)
+                    X_test.append(trainingVector)
+                    y_test.append(0)
 
 
 
 end_time = time.time()
 print('Time to create ds ', end_time - start_time)
-print('Pickling training ds')
+print('Pickling testing ds')
 
-X_train = np.array(X_train)
-y_train = np.array(y_train)
+X_test = np.array(X_test)
+y_test = np.array(y_test)
 
-pickle_object(X_train, 'X_train')
-pickle_object(y_train, 'y_train')
+pickle_object(X_test, 'X_test')
+pickle_object(y_test, 'y_test')
 
 
 conn.close()
-training_db.close()
+testing_db.close()

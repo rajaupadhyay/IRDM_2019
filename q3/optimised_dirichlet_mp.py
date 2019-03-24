@@ -113,46 +113,6 @@ def retrieve_top_five_docs(tokens, ividx_dct):
 Iterate over the training file containing the claims
 Retrieve top 5 docs for each claim
 '''
-# translator = str.maketrans('', '', string.punctuation)
-#
-# stop_words = set(stopwords.words('english'))
-# stop_words = stop_words.union(['-lrb-', '-rrb-'])
-#
-# porter_stemmer = PorterStemmer()
-#
-# def tokenise_claim(claim):
-#
-#     tokens = word_tokenize(claim)
-#
-#     # Lowercase
-#     tokens = list(map(lambda x: x.lower(), tokens))
-#     # Remove stopwords
-#     tokens = list(filter(lambda l_ph: l_ph not in stop_words, tokens))
-#     # Remove punctuation and stem
-#     tokens = [porter_stemmer.stem((val.translate(translator))) for val in tokens]
-#     # tokens = list(map(lambda val: PorterStemmer().stem(val), tokens))
-#
-#     # tokens = set(tokens)
-#     if '' in tokens:
-#         while '' in tokens:
-#             tokens.remove('')
-#
-#     tokens = list(tokens)
-#     return tokens
-#
-#
-#
-# def file_reader_generator(file_object):
-#     while True:
-#         data = file_object.readline()
-#         if not data:
-#             break
-#         yield data
-
-
-# ividx_dct = SqliteDict('ividx_with_freq.sqlite', decode=decompress_set)
-
-
 inverted_doc_name_dict_f = open('inverted_doc_name_dict.pickle', 'rb')
 inverted_doc_name_dict = pickle.load(inverted_doc_name_dict_f)
 inverted_doc_name_dict_f.close()
@@ -208,16 +168,35 @@ def main():
     # Create a new db which will store the 5 top docs for each claim
     # top_5_docs_sq_db = SqliteDict('top_5_documents_tfidf.sqlite', autocommit=True, encode=compress_set, decode=decompress_set)
 
-    claimToDocsDict_f = open('claimToDocsDict.pickle', 'rb')
-    claimToDocsDict = pickle.load(claimToDocsDict_f)
-    claimToDocsDict_f.close()
+    # claimToDocsDict_f = open('claimToDocsDict.pickle', 'rb')
+    # claimToDocsDict = pickle.load(claimToDocsDict_f)
+    # claimToDocsDict_f.close()
 
 
-    # Split the training file of claims into 4 batches to distribute load
-    batch_1 = 'data/tokenised_train_batches/train_batch1.pickle'
-    batch_2 = 'data/tokenised_train_batches/train_batch2.pickle'
-    batch_3 = 'data/tokenised_train_batches/train_batch3.pickle'
-    batch_4 = 'data/tokenised_train_batches/train_batch4.pickle'
+    carryOutTrainData = 0
+
+    if carryOutTrainData == 1:
+        batch_1 = 'data/tokenised_train_batches/train_batch1.pickle'
+        batch_2 = 'data/tokenised_train_batches/train_batch2.pickle'
+        batch_3 = 'data/tokenised_train_batches/train_batch3.pickle'
+        batch_4 = 'data/tokenised_train_batches/train_batch4.pickle'
+
+        claimToDocsDict_f = open('claimToDocsDict_train.pickle', 'rb')
+        claimToDocsDict = pickle.load(claimToDocsDict_f)
+        claimToDocsDict_f.close()
+        cTd_outname = 'claimToDocsDict_train_V1'
+
+    else:
+        batch_1 = 'data/tokenised_test_batches/test_batch1.pickle'
+        batch_2 = 'data/tokenised_test_batches/test_batch2.pickle'
+        batch_3 = 'data/tokenised_test_batches/test_batch3.pickle'
+        batch_4 = 'data/tokenised_test_batches/test_batch4.pickle'
+
+        claimToDocsDict_f = open('claimToDocsDict_test.pickle', 'rb')
+        claimToDocsDict = pickle.load(claimToDocsDict_f)
+        claimToDocsDict_f.close()
+        cTd_outname = 'claimToDocsDict_test_V1'
+
 
     start_time_parent = time.time()
 
@@ -247,11 +226,13 @@ def main():
     # Combine results from all 4 processes
     final_dict = {**first_batch_res, **second_batch_res, **third_batch_res, **fourth_batch_res}
 
-    print('Pickling result into claimToDocsDict.pickle')
+    print('Pickling dict')
     # Update claimToDocsDict
 
     claimToDocsDict.update(final_dict)
-    pickle_object(claimToDocsDict, 'claimToDocsDict_V1')
+    pickle_object(claimToDocsDict, cTd_outname)
+
+
     # # Insert the results into the database
     # for k,v in final_dict.items():
     #     top_5_docs_sq_db[k] = v

@@ -1,17 +1,5 @@
 '''
-Build the training dataset for logit
-
-First we're just testing the model on 18000 claims
-
-- Iterate over the claimToDocsDict
-- For each claim and respective docs list
-    - First get the relevant sentences from the evidence field for the specific claim (Positive examples)
-    - Randomly sample the same number (+1/2) irrelevant sentences from the docs list
-    - Represent these sentences using embeddings (Glove Gensim)
-    - Represent the claim using the same embedding method
-    - A single datapoint would now consist of one sentence (relevant or irrelevant) and the claim (as 2 distinct features represented as embeddings (,300)) concatenated
-    - The label for the datapoint would be whether the sentence (1st feature) is relevant or not with respect to the claim (2nd feature)
-
+Build the imbalanced testing dataset without sampling for logit
 '''
 
 import pickle
@@ -29,6 +17,7 @@ from gensim.models import KeyedVectors
 import string
 import random
 from nltk import word_tokenize
+from collections import defaultdict
 
 print('Loading word2vec')
 w2v_model = KeyedVectors.load_word2vec_format('data/GoogleNews-vectors-negative300.bin.gz', binary=True)
@@ -57,12 +46,12 @@ def file_reader_generator(file_object):
         yield data
 
 print('Loading claimToDocsDict')
-claimToDocsDict_f = open('claimToDocsDict_train.pickle', 'rb')
+claimToDocsDict_f = open('claimToDocsDict_test.pickle', 'rb')
 claimToDocsDict = pickle.load(claimToDocsDict_f)
 claimToDocsDict_f.close()
 
 print('Loading Claims')
-training_db = SqliteDict('training_db.sqlite', decode=decompress_set)
+training_db = SqliteDict('testing_db.sqlite', decode=decompress_set)
 
 print('Loading wiki corpus')
 conn = sqlite3.connect('wiki_corpus.db')
@@ -70,10 +59,7 @@ c = conn.cursor()
 
 def flatten_list(lst):
     flattened = [item for nstd in lst for item in nstd]
-
     return flattened
-
-
 
 translator = str.maketrans('', '', string.punctuation)
 
@@ -103,7 +89,7 @@ y_train = []
 '''
 Build training dataset
 '''
-print('Building training dataset')
+print('Building testing dataset')
 ctr_breaker = 0
 start_time = time.time()
 for claimId, docList in claimToDocsDict.items():
@@ -135,6 +121,10 @@ for claimId, docList in claimToDocsDict.items():
             positiveExamples = training_db[claimId][-1]
             positiveExamples = flatten_list(positiveExamples)
             addedLines = []
+
+
+            addedPosExamples = defaultdict(list)
+
 
             # Add positive examples
             for itx in positiveExamples:
@@ -170,52 +160,55 @@ for claimId, docList in claimToDocsDict.items():
                     X_train.append(trainingVector)
                     y_train.append(1)
 
+                addedPosExamples[docname].append(lineNumber)
+
 
             # Add negative examples
-            for _ in range(len(addedLines)+1):
-                randomDoc = random.choice(docList)
-                c.execute('SELECT lines FROM wiki WHERE id = ?', (randomDoc, ))
 
-                lines = c.fetchone()[0]
-                lines = list(filter(lambda x: x, re.split('\d+\\t', lines)))
-                totalLines = len(lines)
+            for docItx in docList:
+                c.execute('SELECT lines FROM wiki WHERE id = ?', (docname, ))
 
-                lenMask = [lnmb for lnmb in range(totalLines) if lnmb not in addedLines]
-
-                if len(lenMask) == 0:
+                try:
+                    lines = c.fetchone()[0]
+                except:
+                    print('could not get lines for doc {} '.format(docname))
                     continue
 
-                randLineNumber = random.choice(lenMask)
+                lines = list(filter(lambda x: x, re.split('\d+\\t', lines)))
 
-                line = lines[randLineNumber]
+                for lineNumber in range(len(lines)):
+                    if lineNumber in addedPosExamples[docItx]:
+                        continue
 
-                lineTokens = tokenise_line(line)
+                    line = lines[lineNumber]
 
-                lineVec = []
+                    lineTokens = tokenise_line(line)
 
-                for token in lineTokens:
-                    if token in w2v_model:
-                        lineVec.append(w2v_model[token])
+                    lineVec = []
 
-                if len(lineVec) > 0:
-                    lenLineVec = len(lineVec)
-                    lineVec = sum(lineVec)/lenLineVec
+                    for token in lineTokens:
+                        if token in w2v_model:
+                            lineVec.append(w2v_model[token])
 
-                    trainingVector = np.concatenate([claimVec, lineVec])
-                    X_train.append(trainingVector)
-                    y_train.append(0)
 
+                    if len(lineVec) > 0:
+                        lenLineVec = len(lineVec)
+                        lineVec = sum(lineVec)/lenLineVec
+
+                        trainingVector = np.concatenate([claimVec, lineVec])
+                        X_train.append(trainingVector)
+                        y_train.append(0)
 
 
 end_time = time.time()
 print('Time to create ds ', end_time - start_time)
-print('Pickling training ds')
+print('Pickling testing ds')
 
 X_train = np.array(X_train)
 y_train = np.array(y_train)
 
-pickle_object(X_train, 'X_train')
-pickle_object(y_train, 'y_train')
+pickle_object(X_train, 'X_test_imbalanced')
+pickle_object(y_train, 'y_test_imbalanced')
 
 
 conn.close()

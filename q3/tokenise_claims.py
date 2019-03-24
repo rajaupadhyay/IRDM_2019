@@ -66,7 +66,7 @@ def helper_fn(filePath):
 
     with open(filePath, 'r') as openfile:
         for line in file_reader_generator(openfile):
-            if total_itrs == 3000:
+            if total_itrs == 1500:
                 break
 
             total_itrs += 1
@@ -80,18 +80,38 @@ def helper_fn(filePath):
     return train_batch
 
 
-batch_1 = 'data/train_batches/train_batch1.jsonl'
-batch_2 = 'data/train_batches/train_batch2.jsonl'
-batch_3 = 'data/train_batches/train_batch3.jsonl'
-batch_4 = 'data/train_batches/train_batch4.jsonl'
+carryOutTrainData = 0
+nm = None
 
-train_batch1 = helper_fn(batch_1)
-train_batch2 = helper_fn(batch_2)
-train_batch3 = helper_fn(batch_3)
-train_batch4 = helper_fn(batch_4)
+if carryOutTrainData == 1:
+    '''
+    Tokenise training data
+    '''
+    batch_1 = 'data/train_batches/train_batch1.jsonl'
+    batch_2 = 'data/train_batches/train_batch2.jsonl'
+    batch_3 = 'data/train_batches/train_batch3.jsonl'
+    batch_4 = 'data/train_batches/train_batch4.jsonl'
+    nm = 'train'
+else:
+    '''
+    Tokenise test data
+    '''
+    batch_1 = 'data/test_batches/test_batch1.jsonl'
+    batch_2 = 'data/test_batches/test_batch2.jsonl'
+    batch_3 = 'data/test_batches/test_batch3.jsonl'
+    batch_4 = 'data/test_batches/test_batch4.jsonl'
+    nm = 'test'
 
 
-pickle_object(train_batch1, 'train_batch1')
-pickle_object(train_batch2, 'train_batch2')
-pickle_object(train_batch3, 'train_batch3')
-pickle_object(train_batch4, 'train_batch4')
+
+res_batch1 = helper_fn(batch_1)
+res_batch2 = helper_fn(batch_2)
+res_batch3 = helper_fn(batch_3)
+res_batch4 = helper_fn(batch_4)
+
+
+
+pickle_object(res_batch1, '{}_batch1'.format(nm))
+pickle_object(res_batch2, '{}_batch2'.format(nm))
+pickle_object(res_batch3, '{}_batch3'.format(nm))
+pickle_object(res_batch4, '{}_batch4'.format(nm))
