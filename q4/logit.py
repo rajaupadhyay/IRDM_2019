@@ -3,6 +3,7 @@ Logistic regression implementation
 '''
 import numpy as np
 import pickle
+from metrics import *
 
 class VanillaLogisticRegression:
     def __init__(self, lr=0.01, max_iter=100):
@@ -76,11 +77,11 @@ y_train_f = open('data/balanced_train_test/y_train.pickle', 'rb')
 y_train = pickle.load(y_train_f)
 y_train_f.close()
 
-X_test_f = open('data/balanced_train_test/X_test.pickle', 'rb')
+X_test_f = open('data/balanced_train_test/X_test_balanced.pickle', 'rb')
 X_test = pickle.load(X_test_f)
 X_test_f.close()
 
-y_test_f = open('data/balanced_train_test/y_test.pickle', 'rb')
+y_test_f = open('data/balanced_train_test/y_test_balanced.pickle', 'rb')
 y_test = pickle.load(y_test_f)
 y_test_f.close()
 
@@ -93,3 +94,11 @@ clf.fit(X_train, y_train)
 res = clf.predict(X_test)
 
 print(accuracy(res, y_test))
+
+precisionVal = precision(y_test, res)
+recallVal = recall(y_test, res)
+f1Score = f1_score(y_test, res)
+
+print('precision: ', precisionVal)
+print('recall: ', recallVal)
+print('f1 score: ', f1Score)

@@ -202,8 +202,8 @@ print('Pickling testing ds')
 X_test = np.array(X_test)
 y_test = np.array(y_test)
 
-pickle_object(X_test, 'X_test')
-pickle_object(y_test, 'y_test')
+pickle_object(X_test, 'X_test_balanced')
+pickle_object(y_test, 'y_test_balanced')
 
 
 conn.close()
