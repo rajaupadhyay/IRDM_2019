@@ -139,7 +139,7 @@ def helper_fn(batch_fn):
 
 
     for cid, tokens in train_btch.items():
-        if total_itrs == 1500:
+        if total_itrs == 5000:
             break
 
         if total_itrs%50 == 0:
@@ -173,7 +173,7 @@ def main():
     # claimToDocsDict_f.close()
 
 
-    carryOutTrainData = 0
+    carryOutTrainData = 1
 
     if carryOutTrainData == 1:
         batch_1 = 'data/tokenised_train_batches/train_batch1.pickle'

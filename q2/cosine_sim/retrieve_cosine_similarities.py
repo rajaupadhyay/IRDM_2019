@@ -69,7 +69,7 @@ def retrieve_top_five_docs(tokens):
 
     tfidf_for_query = term_freq_vector * idf_vector
     enlv_for_query = LA.norm(tfidf_for_query)
-    print('enlv', enlv_for_query, tfidf_for_query)
+    # print('enlv', enlv_for_query, tfidf_for_query)
 
 
     # Key: Doc number/ID, value: cosine similarity
@@ -148,7 +148,7 @@ total_itrs = 0
 start_time = time.time()
 with open('data/train.jsonl', 'r') as openfile:
     for line in file_reader_generator(openfile):
-        if total_itrs == 1:
+        if total_itrs == 15:
             break
 
         if total_itrs%50 == 0:

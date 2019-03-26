@@ -66,7 +66,7 @@ def helper_fn(filePath):
 
     with open(filePath, 'r') as openfile:
         for line in file_reader_generator(openfile):
-            if total_itrs == 1500:
+            if total_itrs == 5000:
                 break
 
             total_itrs += 1
@@ -80,7 +80,7 @@ def helper_fn(filePath):
     return train_batch
 
 
-carryOutTrainData = 0
+carryOutTrainData = 1
 nm = None
 
 if carryOutTrainData == 1:

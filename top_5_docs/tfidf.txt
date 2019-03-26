@@ -1,39 +1,44 @@
 75397 [3510191, 5149384, 291223, 3541706, 3508468]
 150448 [541502, 2454098, 640333, 596034, 993333]
-214861 [526907, 2247943, 5163086, 1919397, 4849139]
+214861 [526907, 4849139, 3548961, 2247943, 3019419]
 156709 [264217, 281895, 1612423, 2413013, 2511050]
-83235 [2305553, 4500037, 2828894, 2835962, 2862482]
-129629 [1002188, 4717964, 146765, 121193, 141522]
-149579 [2839403, 2818972, 2829375, 2901253, 672264]
-229289 [3492651, 725991, 4284319, 2856246, 2068601]
+129629 [2968910, 2175161, 2232762, 2169221, 2848606]
 33078 [4727442, 4718687, 62350, 4710207, 819893]
 6744 [1581779, 1414963, 1510567, 1600063, 3550517]
-
-The top 5 documents for the first 10 claims
-
-ctr val 1
-['Nikolaj', 'Ved_verdens_ende', 'A_Second_Chance_-LRB-2014_film-RRB-', 'New_Amsterdam_-LRB-TV_series-RRB-', 'Nikolaj_Coster-Waldau']
-ctr val 2
-['Atwood', 'John_Atwood', 'Atwood_Airport', 'Atwood,_Colorado', 'Charles_Atwood']
-ctr val 3
-['Art_history_-LRB-disambiguation-RRB-', 'History_of_art', 'Visual_arts', 'Gifted_art', 'The_arts']
-ctr val 4
-['Adrienne_Bailon', 'Adrienne_-LRB-disambiguation-RRB-', 'Empire_Girls-COLON-_Julissa_and_Adrienne', 'Joe_Bailon', 'Julissa_Bermudez']
-ctr val 5
-['In_Limbo', 'Sitting_in_Limbo', 'Limbo_-LRB-disambiguation-RRB-', 'Limbo_-LRB-DC_Comics-RRB-', 'Limbo_-LRB-Brathwaite_poem-RRB-']
-ctr val 6
-['Central_Television', 'Television_-LRB-disambiguation-RRB-', '2006_in_television', '2010_in_television', '2011_in_television']
-ctr val 7
-['List_of_Billboard_Hot_100_number-one_singles_of_1960', 'List_of_Billboard_Hot_100_number-one_singles_of_1979', 'List_of_Billboard_Hot_100_number-one_singles_of_1965', 'List_of_Billboard_Hot_100_number-one_singles_of_1963', 'Billboard_Year-End_Hot_100_singles_of_2003']
-ctr val 8
-['Nasir_Schon', 'Beyond_the_Thunder', 'Schon_Properties', 'Lights_-LRB-Journey_song-RRB-', 'Here_to_Stay_-LRB-Schon_&_Hammer_album-RRB-']
-ctr val 9
-['TD_Garden', 'TD', '1974–75_Boston_Celtics_season', 'TDS', 'Boston_Garden']
-ctr val 10
-['Epic', 'EPIC', 'Epic_-LRB-genre-RRB-', 'Epic_film', 'National_epic']
+226034 [4730014, 4696498, 4700169, 4706623, 4773870]
+40190 [5224859, 2920305, 1251050, 4680781, 4510992]
+76253 [4813652, 4588243, 2227553, 3517675, 4159252]
 
 
+claimID: 75397
+Docs: ['Nikolaj', 'Ved_verdens_ende', 'A_Second_Chance_-LRB-2014_film-RRB-', 'New_Amsterdam_-LRB-TV_series-RRB-', 'Nikolaj_Coster-Waldau']
 
+claimID: 150448
+Docs: ['Atwood', 'John_Atwood', 'Atwood_Airport', 'Atwood,_Colorado', 'Charles_Atwood']
+
+claimID: 214861
+Docs: ['Art_history_-LRB-disambiguation-RRB-', 'The_arts', 'National_Academy_of_Visual_Arts_and_Architecture', 'History_of_art', 'Maine_Arts_Commission']
+
+claimID: 156709
+Docs: ['Adrienne_Bailon', 'Adrienne_-LRB-disambiguation-RRB-', 'Empire_Girls-COLON-_Julissa_and_Adrienne', 'Joe_Bailon', 'Julissa_Bermudez']
+
+claimID: 129629
+Docs: ['List_of_She_Spies_episodes', 'Homeland_-LRB-season_2-RRB-', 'Homeland_-LRB-season_3-RRB-', 'Homeland_-LRB-season_6-RRB-', 'List_of_Prison_Break_characters']
+
+claimID: 33078
+Docs: ['TD_Garden', 'TD', '1974–75_Boston_Celtics_season', 'TDS', 'Boston_Garden']
+
+claimdID: 6744
+Docs: ['Epic', 'EPIC', 'Epic_-LRB-genre-RRB-', 'Epic_film', 'National_epic']
+
+claimID: 226034
+Docs: ['Tetris_Blitz', 'Tetris_2', 'Tetri', 'Tetris_Online,_Inc.', 'The_Tetris_Company']
+
+claimID: 40190
+Docs: ['We_Love_Cyndi_–_Tribute_to_Cyndi_Lauper', 'List_of_awards_and_nominations_received_by_Cyndi_Lauper', 'Cyndi_Lauper', "That's_What_I_Think", 'Sisters_of_Avalon_-LRB-song-RRB-']
+
+claimID: 76253
+Docs: ['The_Hunger_Games_-LRB-disambiguation-RRB-', 'Strictly_from_hunger', 'Hunger_Hill', 'National_Hunger_March,_1932', 'Rise_Against_Hunger']
 
 
 

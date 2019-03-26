@@ -8,21 +8,40 @@
 229289 [4235595]
 33078 [2904706, 834098, 2582840, 4015936]
 6744 [2659007, 4831625, 4835714, 4774169, 1327510]
+226034 [4645435]
+40190 [1251050]
+76253 [3492991, 4754520, 2446803, 2750555, 1699323]
+188923 []
+138503 [3817386]
 
-214861 [2247943]
-['History_of_art']
+ClaimID: 75397
+Docs: []
 
-[2251341]
-['Homeland_-LRB-TV_series-RRB-']
+ClaimID: 150448
+Docs: []
 
-[721047, 4633511, 747145, 5245815, 2639111]
-['Beautiful_-LRB-Snoop_Dogg_song-RRB-', 'Stacie_Orrico', 'Beyoncé_discography', 'White_Flag_-LRB-song-RRB-', 'Kanye_West_discography']
+ClaimID: 214861
+Docs: History_of_art
 
-[4235595]
-['Schön']
+ClaimID: 156709
+Docs: []
 
-[2904706, 834098, 2582840, 4015936]
-['List_of_Boston_Celtics_head_coaches', 'Boston_Celtics', 'KDrew', 'Red_Auerbach']
+ClaimID: 129629
+Docs: Homeland_-LRB-TV_series-RRB-
 
-[2659007, 4831625, 4835714, 4774169, 1327510]
-['Katherine_Orrison', 'The_Nth_Commandment', 'The_Ten_Commandments_-LRB-1923_film-RRB-', 'The_King_of_Kings_-LRB-1927_film-RRB-', 'Debra_Paget']
+ClaimID: 33078
+Docs: ['List_of_Boston_Celtics_head_coaches', 'Boston_Celtics', 'KDrew', 'Red_Auerbach']
+
+ClaimID: 6744
+Docs: ['Katherine_Orrison', 'The_Nth_Commandment', 'The_Ten_Commandments_-LRB-1923_film-RRB-', 'The_King_of_Kings_-LRB-1927_film-RRB-', 'Debra_Paget']
+
+ClaimID: 226034
+Docs: Tetris
+
+ClaimID: 40190
+Docs: Cyndi_Lauper
+
+ClaimID: 76253
+Docs: ['Nina_Jacobson', 'The_Hunger_Games', 'Jo_Blankenburg', 'Laurie_Spiegel', 'Exodus_-LRB-Andy_Hunter_album-RRB-']
+
+

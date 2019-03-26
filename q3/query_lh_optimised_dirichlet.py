@@ -145,7 +145,7 @@ ividx_dct = SqliteDict('ividx_with_freq.sqlite', decode=decompress_set)
 
 with open('data/train.jsonl', 'r') as openfile:
     for line in file_reader_generator(openfile):
-        if total_itrs == 10:
+        if total_itrs == 13:
             end_time = time.time()
             total_time = end_time - start_time
             print(total_itrs, total_time)

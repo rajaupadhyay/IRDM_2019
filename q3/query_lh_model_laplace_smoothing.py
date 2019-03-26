@@ -162,7 +162,7 @@ total_itrs = 0
 start_time = time.time()
 with open('data/train.jsonl', 'r') as openfile:
     for line in file_reader_generator(openfile):
-        if total_itrs == 10:
+        if total_itrs == 13:
             break
 
         if total_itrs%50 == 0:
