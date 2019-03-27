@@ -7,18 +7,20 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
+from sklearn.metrics import log_loss
 
 
+y_pred_proba_f = open('y_pred_proba.pkl', 'rb')
+y_pred_proba = pickle.load(y_pred_proba_f)
+y_pred_proba_f.close()
+print(len(y_pred_proba))
 
-# y_pred_proba_f = open('y_pred_proba.pkl', 'rb')
-# y_pred_proba = pickle.load(y_pred_proba_f)
-# y_pred_proba_f.close()
-#
-#
-# y_test_f = open('data/imbalanced_train_test/y_test.pickle', 'rb')
-# y_test = pickle.load(y_test_f)
-# y_test_f.close()
-#
+y_test_f = open('data/imbalanced_train_test/y_test_imbalanced.pickle', 'rb')
+y_test = pickle.load(y_test_f)
+y_test_f.close()
+
+print('log_loss: ', log_loss(y_test, y_pred_proba))
+
 # fpr, tpr, _ = metrics.roc_curve(y_test,  y_pred_proba)
 # auc = metrics.roc_auc_score(y_test, y_pred_proba)
 # plt.title('ROC Curve (Balanced Train - Imbalanced Test)')

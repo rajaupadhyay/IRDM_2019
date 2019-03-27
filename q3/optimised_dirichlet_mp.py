@@ -139,7 +139,7 @@ def helper_fn(batch_fn):
 
 
     for cid, tokens in train_btch.items():
-        if total_itrs == 5000:
+        if total_itrs == 3000:
             break
 
         if total_itrs%50 == 0:

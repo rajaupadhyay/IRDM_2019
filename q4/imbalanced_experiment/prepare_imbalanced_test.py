@@ -50,6 +50,9 @@ claimToDocsDict_f = open('claimToDocsDict_test.pickle', 'rb')
 claimToDocsDict = pickle.load(claimToDocsDict_f)
 claimToDocsDict_f.close()
 
+top_10_claimIDs = [137334, 111897, 89891, 181634, 219028, 108281, 204361, 54168, 105095, 18708]
+claimToDocsDict = {itx: claimToDocsDict[itx] for itx in top_10_claimIDs}
+
 print('Loading Claims')
 training_db = SqliteDict('testing_db.sqlite', decode=decompress_set)
 
@@ -207,8 +210,8 @@ print('Pickling testing ds')
 X_train = np.array(X_train)
 y_train = np.array(y_train)
 
-pickle_object(X_train, 'X_test_imbalanced')
-pickle_object(y_train, 'y_test_imbalanced')
+pickle_object(X_train, 'X_test_imbalanced_top_10')
+pickle_object(y_train, 'y_test_imbalanced_top_10')
 
 
 conn.close()

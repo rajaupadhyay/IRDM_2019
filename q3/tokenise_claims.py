@@ -66,7 +66,7 @@ def helper_fn(filePath):
 
     with open(filePath, 'r') as openfile:
         for line in file_reader_generator(openfile):
-            if total_itrs == 5000:
+            if total_itrs == 3000:
                 break
 
             total_itrs += 1

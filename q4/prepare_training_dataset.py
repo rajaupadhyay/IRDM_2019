@@ -70,7 +70,6 @@ c = conn.cursor()
 
 def flatten_list(lst):
     flattened = [item for nstd in lst for item in nstd]
-
     return flattened
 
 
