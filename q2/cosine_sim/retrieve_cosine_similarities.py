@@ -148,8 +148,12 @@ total_itrs = 0
 start_time = time.time()
 with open('data/train.jsonl', 'r') as openfile:
     for line in file_reader_generator(openfile):
-        if total_itrs == 15:
+        if total_itrs == 10:
             break
+
+        json_dict = json.loads(line)
+        if json_dict['verifiable'] == 'NOT VERIFIABLE':
+            continue
 
         if total_itrs%50 == 0:
             end_time = time.time()
@@ -159,10 +163,14 @@ with open('data/train.jsonl', 'r') as openfile:
 
         total_itrs += 1
 
-        json_dict = json.loads(line)
+
         curr_claim = json_dict['claim']
         claim_id = json_dict['id']
         tokenised_claim = tokenise_claim(curr_claim)
 
         res = retrieve_top_five_docs(tokenised_claim)
         print(claim_id, res)
+
+    end_time = time.time()
+    total_time = end_time - start_time
+    print(total_itrs, total_time)
