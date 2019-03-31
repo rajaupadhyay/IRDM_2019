@@ -160,7 +160,7 @@ for claimId, docList in claimToDocsDict.items():
 
 
             # Add negative examples
-            for _ in range(len(addedLines)+1):
+            for _ in range(len(addedLines)):
                 randomDoc = random.choice(docList)
                 c.execute('SELECT lines FROM wiki WHERE id = ?', (randomDoc, ))
 

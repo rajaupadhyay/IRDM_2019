@@ -1,40 +1,40 @@
-75397 [3401860, 3977182, 2832995, 2599174, 4947710]
-150448 [2206423, 703559, 4441695, 1515196, 4164124]
-214861 [2821719, 2993350, 2925579, 2056107, 1199268]
-156709 [2292290, 1196885, 2194262, 614051, 3479931]
-129629 [2952216, 409480, 1765202, 2069582, 2939083]
-33078 [2817900, 2928246, 3773937, 2929726, 3803191]
-6744 [2985953, 2965524, 2491648, 338785, 4468568]
-226034 [602798, 2963249, 2904522, 2961790, 2158421]
-40190 [2844141, 3004482, 4947710, 2983600, 2227799]
-76253 [2961316, 2409829, 3435672, 3564565, 1131092]
+75397 [2915033, 1736409, 2786806, 3363842, 823236]
+150448 [2979977, 2879214, 2206423, 272010, 703559]
+214861 [2872042, 273735, 2979977, 4798450, 2809139]
+156709 [264217, 2292290, 1196885, 2194262, 614051]
+129629 [2960232, 2251341, 2934343, 2961684, 2979977]
+33078 [76735, 2467399, 2979977, 4518635, 1409069]
+6744 [4767495, 998899, 2935783, 2979977, 1192936]
+226034 [2493781, 1570617, 2929726, 5043000, 5233464]
+40190 [1251050, 2956303, 1283452, 2914444, 2920767]
+76253 [2979977, 2813070, 4754520, 2988580, 2842063]
 
-claimID: 75397
-Docs: ['Mottos_and_halls_of_the_Livery_Companies', 'Pteropodinae', 'List_of_New_Jersey_street_railroads', 'Kcho', 'Timeline_of_Class_I_railroads_-LRB-1930–76-RRB-']
 
-claimID: 150448
-Docs: ['History_of_Rome_-LRB-disambiguation-RRB-', 'Battle_of_Arretium', 'Socii', 'Editorial_calendar', 'Roman_technology']
+['List_of_early_British_private_locomotive_manufacturers', 'Fox_Broadcasting_Company', 'Lar_Lubovitch_Dance_Company', 'NBC_Opera_Theatre', 'British_National_Opera_Company']
 
-claimID: 214861
-Docs: ['Library_of_Congress_Classification-COLON-Class_D,_subclass_DT_--_History_of_Africa', 'List_of_Turkish_film_directors', 'List_of_years_in_hip_hop_music', 'Harrisburg_in_film_and_television', 'DBCult_Film_Institute']
 
-claimID: 156709
-Docs: ['International_Accounting_Standards_Committee', 'Continuous_accounting', 'IFACnet', 'Bachelor_of_Accountancy', 'Nigerian_College_of_Accountancy']
+['List_of_video_game_crowdfunding_projects', 'List_of_Chinese_hymn_books', 'History_of_Rome_-LRB-disambiguation-RRB-', 'Agri_Decumates', 'Battle_of_Arretium']
 
-claimID: 129629
-Docs: ['List_of_people_with_given_name_Preston', 'Aldrich_-LRB-surname-RRB-', 'Flowers_-LRB-name-RRB-', 'Harrington_-LRB-surname-RRB-', 'List_of_artists_in_the_Philadelphia_Museum_of_Art_handbook_of_the_collections']
 
-claimID: 33078
-Docs: ['List_of_Michigan_state_game_areas', 'List_of_botanical_gardens_in_Japan', 'Pierre_Monteux_discography', 'List_of_best-selling_Xbox_360_video_games', 'Plant_Collections_Network']
+['List_of_New_Music_America_performances', 'Acropolis_Institute_of_Technology_and_Research', 'List_of_video_game_crowdfunding_projects', 'The_Nritarutya_Dance_Collective', 'List_of_Guggenheim_Fellowships_awarded_in_1968']
 
-claimID: 6744
-Docs: ['List_of_baseball_parks_used_in_film_and_television', 'List_of_awards_won_by_Abbas_Kiarostami', 'John_Ford_Stock_Company', 'Albie_Thoms', 'Simon_Staho']
 
-claimID: 226034
-Docs: ['Australian_Historical_Monographs', 'List_of_ships_of_the_line_of_Spain', 'List_of_Researchers_at_Racah_Institute', 'List_of_impact_craters_in_Europe', 'ISO_10303_Application_Modules']
+['Adrienne_Bailon', 'International_Accounting_Standards_Committee', 'Continuous_accounting', 'IFACnet', 'Bachelor_of_Accountancy']
 
-claimID: 40190
-Docs: ['List_of_Catholic_schools_in_New_York', 'List_of_United_Kingdom_locations-COLON-_Newm-Newto', 'Timeline_of_Class_I_railroads_-LRB-1930–76-RRB-', 'List_of_tributaries_of_the_Rio_Grande', 'Igor_Stravinsky_discography']
 
-claimID: 76253
-Docs: ['List_of_wargame_publishers', 'Joel_Breton', 'MotoGP_-LRB-disambiguation-RRB-', 'Operator_assistance', 'Combinatorial_game_theory']
+['List_of_fictional_nurses', 'Homeland_-LRB-TV_series-RRB-', 'List_of_fictional_anthropologists', 'List_of_prisoners_of_war', 'List_of_video_game_crowdfunding_projects']
+
+
+['1984_NBA_Finals', 'Jeremy_Owens', 'List_of_video_game_crowdfunding_projects', 'Sports_in_Boston', 'Draperstown_Celtic_F.C.']
+
+
+['The_Ten_Commandments_-LRB-1956_film-RRB-', 'Cecil_B._DeMille', 'List_of_accolades_received_by_Master_and_Commander-COLON-_The_Far_Side_of_the_World', 'List_of_video_game_crowdfunding_projects', 'Dan_Gitlin']
+
+
+['Jolin_Tsai_discography', 'Eminem_discography', 'List_of_best-selling_Xbox_360_video_games', 'Usher_discography', 'Whitney_Houston_discography']
+
+
+['Cyndi_Lauper', 'List_of_awards_and_nominations_received_by_Leonard_Cohen', 'Country_music_awards', 'Lo_Nuestro_Award_for_Pop_New_Artist_of_the_Year', 'List_of_awards_and_nominations_received_by_Madonna']
+
+
+['List_of_video_game_crowdfunding_projects', 'List_of_PlayStation_3_games_released_on_disc', 'The_Hunger_Games', 'List_of_accolades_received_by_The_Hunger_Games_film_series', 'List_of_Nintendo_DS_games']

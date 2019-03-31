@@ -105,7 +105,7 @@ def retrieve_top_five_docs(tokens):
             missingQueryTerms = length_of_claim - words_added[k]
             assert(missingQueryTerms>=1)
             curr_doc_length = doc_length_vec[int(k)]
-            new_value = v * ((1/curr_doc_length+VOCABSIZE)**(missingQueryTerms))
+            new_value = v * ((1/(curr_doc_length+VOCABSIZE))**(missingQueryTerms))
 
         formatted_result_dictionary[k] = new_value
 

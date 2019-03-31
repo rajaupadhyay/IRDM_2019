@@ -136,7 +136,7 @@ for claimId, docList in claimToDocsDict.items():
                 try:
                     lines = c.fetchone()[0]
                 except:
-                    print('could not get lines for doc {} '.format(docname))
+                    # print('could not get lines for doc {} '.format(docname))
                     continue
 
                 lines = list(filter(lambda x: x, re.split('\d+\\t', lines)))
