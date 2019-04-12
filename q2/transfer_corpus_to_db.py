@@ -61,8 +61,9 @@ def get_contents(file_name):
 conn = sqlite3.connect('wiki_corpus.db')
 c = conn.cursor()
 
-c.execute('SELECT * FROM wiki WHERE id = ?', ("Nikolaj_Coster-Waldau", ))
+# c.execute('SELECT * FROM wiki WHERE id = ?', ("Nikolaj_Coster-Waldau", ))
 # c.execute('SELECT COUNT(*) FROM wiki')
+c.execute('SELECT * FROM wiki WHERE id = ?', ("Tetri", ))
 
 print(c.fetchone()[1])
 

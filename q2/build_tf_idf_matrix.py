@@ -13,81 +13,81 @@ def pickle_object(obj, filename):
         pickle.dump(obj, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
-# print('Loading the doc term matrix.')
-#
-# dtm_mat = open('doc_term_matrix.pickle', 'rb')
-# test_dtm = pickle.load(dtm_mat)
-# dtm_mat.close()
-#
-# # print(test_dtm.getrow(5090422))
-#
-#
-# # row_sums = test_dtm.sum(1)
-# # idx = np.where(row_sums == 0)[0]
-# #
-# # print(idx[:5])
-#
-# # print(test_dtm.getrow(178))
-# print(test_dtm.shape)
-#
-#
-# print('Loaded the doc term matrix successfully.')
-#
-# '''
-# Calculate the inverse document frequency
-# '''
-# print('Calculating the document frequency')
-# document_frequency = test_dtm.col
-# uniq_indices, document_frequency = np.unique(document_frequency, return_counts=True)
-# # document_frequency = np.count_nonzero(test_dtm.toarray(), axis=0)
-#
-# print('Calculating the inverse document frequency')
-# # log_10(N/n)   -> np.log10(5/document_frequency)
-# idf_vector = np.log10(test_dtm.shape[0]/document_frequency)
-#
-# print('Pickling the IDF vector')
-# pickle_object(idf_vector, 'idf_vector')
-#
-# document_frequency = None
-#
-# # print(idf_vector)
-#
-# '''
-# Now normalise the term frequencies
-# '''
-# # print(test_dtm.sum(1))
-# print('Normalising term frequencies')
-#
-# print('Retrieving nonzero vals')
-# r,c = test_dtm.nonzero()
+print('Loading the doc term matrix.')
+
+dtm_mat = open('doc_term_matrix.pickle', 'rb')
+test_dtm = pickle.load(dtm_mat)
+dtm_mat.close()
+
+# print(test_dtm.getrow(5090422))
+
+
 # row_sums = test_dtm.sum(1)
+# idx = np.where(row_sums == 0)[0]
 #
-# print('count non zeroes', np.count_nonzero(row_sums))
-#
-#
-# print('Normalising log')
-# inverse = ((1.0/row_sums)[r])
-#
-# inverse = np.squeeze(np.asarray(inverse))
-# # print(inverse)
-#
-# print('Building normalised matrix')
-# div_sp = coo_matrix((inverse, (r,c)), shape=(test_dtm.shape), dtype=np.float16)
-# out = test_dtm.multiply(div_sp)
-#
-# print('Pickling the normalised term frequencies')
-# pickle_object(out, 'normalised_term_freqs')
-#
-#
-# # print(out.toarray())
-# '''
-# prepare tf-idf matrix
-# '''
-# print('Preparing the TF-IDF matrix')
-# tf_idf_vectors = out.multiply(idf_vector)
-#
-# print('Pickling the TF-IDF matrix!')
-# pickle_object(tf_idf_vectors, 'tf_idf_matrix_compressed')
+# print(idx[:5])
+
+# print(test_dtm.getrow(178))
+print(test_dtm.shape)
+
+
+print('Loaded the doc term matrix successfully.')
+
+'''
+Calculate the inverse document frequency
+'''
+print('Calculating the document frequency')
+document_frequency = test_dtm.col
+uniq_indices, document_frequency = np.unique(document_frequency, return_counts=True)
+# document_frequency = np.count_nonzero(test_dtm.toarray(), axis=0)
+
+print('Calculating the inverse document frequency')
+# log_10(N/n)   -> np.log10(5/document_frequency)
+idf_vector = np.log10(test_dtm.shape[0]/document_frequency)
+
+print('Pickling the IDF vector')
+pickle_object(idf_vector, 'idf_vector')
+
+document_frequency = None
+
+# print(idf_vector)
+
+'''
+Now normalise the term frequencies
+'''
+# print(test_dtm.sum(1))
+print('Normalising term frequencies')
+
+print('Retrieving nonzero vals')
+r,c = test_dtm.nonzero()
+row_sums = test_dtm.sum(1)
+
+print('count non zeroes', np.count_nonzero(row_sums))
+
+
+print('Normalising log')
+inverse = ((1.0/row_sums)[r])
+
+inverse = np.squeeze(np.asarray(inverse))
+# print(inverse)
+
+print('Building normalised matrix')
+div_sp = coo_matrix((inverse, (r,c)), shape=(test_dtm.shape), dtype=np.float16)
+out = test_dtm.multiply(div_sp)
+
+print('Pickling the normalised term frequencies')
+pickle_object(out, 'normalised_term_freqs')
+
+
+# print(out.toarray())
+'''
+prepare tf-idf matrix
+'''
+print('Preparing the TF-IDF matrix')
+tf_idf_vectors = out.multiply(idf_vector)
+
+print('Pickling the TF-IDF matrix!')
+pickle_object(tf_idf_vectors, 'tf_idf_matrix_compressed')
 
 
 

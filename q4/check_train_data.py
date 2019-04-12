@@ -12,37 +12,38 @@ from matplotlib import style
 style.use('ggplot')
 
 
-y_pred_proba_f = open('q4/roc_auc_helpers/y_pred_proba_imb.pkl', 'rb')
-y_pred_proba = pickle.load(y_pred_proba_f)
-y_pred_proba_f.close()
-print(len(y_pred_proba))
+# y_pred_proba_f = open('q4/roc_auc_helpers/y_pred_proba_imb.pkl', 'rb')
+# y_pred_proba = pickle.load(y_pred_proba_f)
+# y_pred_proba_f.close()
+# print(len(y_pred_proba))
+#
+# y_test_f = open('q4/roc_auc_helpers/y_test_imbalanced.pickle', 'rb')
+# y_test = pickle.load(y_test_f)
+# y_test_f.close()
+#
+# # print('log_loss: ', log_loss(y_test, y_pred_proba))
+#
+# fpr, tpr, _ = metrics.roc_curve(y_test,  y_pred_proba)
+# auc = metrics.roc_auc_score(y_test, y_pred_proba)
+# plt.title('ROC Curve (Balanced Train - Imbalanced Test)')
+# plt.plot(fpr,tpr,label="data, auc="+str(round(auc, 4)), color='navy')
+# plt.plot([0, 1], [0, 1], color='red', linestyle='--')
+# plt.legend(loc=4)
+# plt.show()
 
-y_test_f = open('q4/roc_auc_helpers/y_test_imbalanced.pickle', 'rb')
-y_test = pickle.load(y_test_f)
-y_test_f.close()
 
-# print('log_loss: ', log_loss(y_test, y_pred_proba))
 
-fpr, tpr, _ = metrics.roc_curve(y_test,  y_pred_proba)
-auc = metrics.roc_auc_score(y_test, y_pred_proba)
-plt.title('ROC Curve (Balanced Train - Imbalanced Test)')
-plt.plot(fpr,tpr,label="data, auc="+str(round(auc, 4)), color='navy')
-plt.plot([0, 1], [0, 1], color='red', linestyle='--')
-plt.legend(loc=4)
+X_vals = list(np.linspace(0.00001, 1, 9))
+y_vals = [0.6930345280182119, 0.6519446925104179, 0.6395235454051977, 0.6331047690396125, 0.6289984484805333, 0.6260461845610575, 0.6237721912214129, 0.6219414950053435, 0.620422364589415]
+
+
+
+plt.title('Training loss vs learning rate')
+plt.xlabel('Learning rate')
+plt.ylabel('Log loss')
+plt.plot(X_vals, y_vals)
 plt.show()
 
-
-
-# X_vals = list(np.linspace(0.00001, 1, 9))
-# y_vals = [0.6941514256316456, 0.6675577463338476, 0.669738554554836, 0.6733282011437942, 0.676165598258556, 0.678382734587441, 0.6801818746878227, 0.6816951566537858, 0.6830038846621984]
-#
-#
-# plt.title('Log loss vs learning rate (Imbalanced Dev set)')
-# plt.xlabel('Learning rate')
-# plt.ylabel('Log loss')
-# plt.plot(X_vals, y_vals)
-# plt.show()
-#
 
 
 

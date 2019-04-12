@@ -32,7 +32,7 @@ claimdID: 6744
 Docs: ['Epic', 'EPIC', 'Epic_-LRB-genre-RRB-', 'Epic_film', 'National_epic']
 
 claimID: 226034
-Docs: ['Tetris_Blitz', 'Tetris_2', 'Tetri', 'Tetris_Online,_Inc.', 'The_Tetris_Company']
+Docs: ['Tetris_Blitz', 'Tetris_2', 'Tetris', 'Tetris_Online,_Inc.', 'The_Tetris_Company']
 
 claimID: 40190
 Docs: ['We_Love_Cyndi_–_Tribute_to_Cyndi_Lauper', 'List_of_awards_and_nominations_received_by_Cyndi_Lauper', 'Cyndi_Lauper', "That's_What_I_Think", 'Sisters_of_Avalon_-LRB-song-RRB-']
